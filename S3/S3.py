@@ -923,8 +923,8 @@ class S3(object):
             if self.config.progress_meter:
                 progress.done("failed")
             if retries:
-                warning("Retrying failed request: %s (%s)" % (resource['uri'], e))
-                warning("Waiting %d sec..." % self._fail_wait(retries))
+                # warning("Retrying failed request: %s (%s)" % (resource['uri'], e))
+                # warning("Waiting %d sec..." % self._fail_wait(retries))
                 time.sleep(self._fail_wait(retries))
                 # Connection error -> same throttle value
                 return self.send_file(request, file, labels, buffer, throttle, retries - 1, offset, chunk_size)
@@ -968,9 +968,9 @@ class S3(object):
             if retries:
                 if retries < self._max_retries:
                     throttle = throttle and throttle * 5 or 0.01
-                warning("Upload failed: %s (%s)" % (resource['uri'], e))
-                warning("Retrying on lower speed (throttle=%0.2f)" % throttle)
-                warning("Waiting %d sec..." % self._fail_wait(retries))
+                #warning("Upload failed: %s (%s)" % (resource['uri'], e))
+                #warning("Retrying on lower speed (throttle=%0.2f)" % throttle)
+                #warning("Waiting %d sec..." % self._fail_wait(retries))
                 time.sleep(self._fail_wait(retries))
                 # Connection error -> same throttle value
                 return self.send_file(request, file, labels, buffer, throttle, retries - 1, offset, chunk_size)
@@ -1015,8 +1015,8 @@ class S3(object):
 
             if try_retry:
                 if retries:
-                    warning("Upload failed: %s (%s)" % (resource['uri'], S3Error(response)))
-                    warning("Waiting %d sec..." % self._fail_wait(retries))
+                    #warning("Upload failed: %s (%s)" % (resource['uri'], S3Error(response)))
+                    #warning("Waiting %d sec..." % self._fail_wait(retries))
                     time.sleep(self._fail_wait(retries))
                     return self.send_file(request, file, labels, buffer, throttle, retries - 1, offset, chunk_size)
                 else:
